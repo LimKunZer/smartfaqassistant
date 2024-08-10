@@ -2,7 +2,6 @@ import pandas as pd
 import ast
 import streamlit as st
 import openai
-from openai.embeddings_utils import cosine_similarity
 
 openai.api_key = st.secrets["mykey"]
 df = pd.read_csv("qa_dataset_with_embeddings.csv")
@@ -22,7 +21,7 @@ def find_best_answer(user_question):
    user_question_embedding = get_embedding(user_question)
 
    # Calculate cosine similarities for all questions in the dataset
-   df['Similarity'] = df['Question_Embedding'].apply(lambda x: cosine_similarity(x, user_question_embedding))
+   df['Similarity'] = df['Question_Embedding'].apply(lambda x: openai.embedding_utils.cosine_similarity(x, user_question_embedding))
 
    # Find the most similar question and get its corresponding answer
    most_similar_index = df['Similarity'].idxmax()
