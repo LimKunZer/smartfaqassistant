@@ -1,6 +1,8 @@
 import pandas as pd
 import ast
 import streamlit as st
+import numpy as np
+import openai
 from sklearn.metrics.pairwise import cosine_similarity
 
 openai.api_key = st.secrets["mykey"]
