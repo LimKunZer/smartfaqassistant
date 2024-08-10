@@ -11,6 +11,9 @@ df = pd.read_csv("qa_dataset_with_embeddings.csv")
 def get_embedding(text, model="text-embedding-ada-002"):
    return openai.Embedding.create(input = [text], model=model)['data'][0]['embedding']
 
+# Pre-calculate embeddings for all questions in the dataset
+df['Question_Embedding'] = df['Question'].apply(get_embedding)
+
 # Convert the string embeddings back to lists
 df['Question_Embedding'] = df['Question_Embedding'].apply(ast.literal_eval)
 
