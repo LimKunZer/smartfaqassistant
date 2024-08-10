@@ -3,7 +3,7 @@ import ast
 import streamlit as st
 import openai
 
-openai.api_key = my_key
+openai.api_key = st.secrets["mykey"]
 df = pd.read_csv("qa_dataset_with_embeddings.csv")
 
 # Function to get embedding
