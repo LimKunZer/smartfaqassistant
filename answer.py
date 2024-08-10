@@ -1,9 +1,13 @@
 import pandas as pd
 import ast
 import streamlit as st
-import openai
+from openai.embeddings_utils import cosine_similarity
 
 df = pd.read_csv("qa_dataset_with_embeddings.csv")
+
+# Function to get embedding
+def get_embedding(text, model="text-embedding-ada-002"):
+   return openai.Embedding.create(input = [text], model=model)['data'][0]['embedding']
 
 # Convert the string embeddings back to lists
 df['Question_Embedding'] = df['Question_Embedding'].apply(ast.literal_eval)
