@@ -1,2 +1,3 @@
 openai==0.28
 matplotlib==3.9.1
+plotly
